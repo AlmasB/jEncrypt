@@ -123,7 +123,10 @@ public class GUI extends JFrame
 			String text = theInput1.getText(); // User input
 			String key = theKey1.getText();
 			
-			theOutput1.setText(enc.process(text, key)); // Add to output area
+			if (enc.validate(text) && enc.validate(key))
+				theOutput1.setText(enc.process(text, key));
+			else
+				theOutput1.setText("Your text or key contains not yet supported characters!");
 		}
 	}
 	
@@ -135,7 +138,10 @@ public class GUI extends JFrame
 			String text = theInput2.getText(); // User input
 			String key = theKey2.getText();
 			
-			theOutput2.setText(dec.process(text, key)); // Add to output area
+			if (dec.validate(text) && dec.validate(key))
+				theOutput1.setText(dec.process(text, key));
+			else
+				theOutput1.setText("Your text or key contains not yet supported characters!");
 		}
 	}
 }
