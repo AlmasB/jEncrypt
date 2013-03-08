@@ -1,6 +1,6 @@
 public class Translator
 {
-  private final String ABC = "?abcdefghijklmnopqrstuvwxyz,.<>[]{}'ABCDEFGHIJKLMNOPQRSTUVWXYZ:;()-+=/*%!1234567890 ";
+	private final String ABC = "?abcdefghijklmnopqrstuvwxyz,.<>[]{}'ABCDEFGHIJKLMNOPQRSTUVWXYZ:;()-+=/*%!1234567890 ";
 	
 	private String sort(String line)
 	{
@@ -19,7 +19,7 @@ public class Translator
 		return temp1 + temp2;
 	}
 	
-	public int charToInt(char c)
+	private int charToInt(char c)
 	{
 		for (int i = 0; i < ABC.length(); i++)
 		{
@@ -30,7 +30,7 @@ public class Translator
 		return -1;
 	}
 	
-	public char intToChar(int a)
+	private char intToChar(int a)
 	{
 		if (a > 0)
 			a = a % ABC.length();
@@ -39,6 +39,14 @@ public class Translator
 		
 		return ABC.charAt(a);
 	}
+	
+	/**
+	 * Transforms two chars into one depending on the operator passed.
+	 * @param a - first char
+	 * @param b - second char
+	 * @param operator - arithmetical operator used in transformation
+	 * @return combined char
+	 */
 	
 	public char combine(char a, char b, char operator)
 	{
