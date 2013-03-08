@@ -39,6 +39,17 @@ public class Translator
 		return ABC.charAt(a);
 	}
 	
+	public boolean validate(String str)
+	{
+		for (int i = 0; i < str.length(); i++)
+		{
+			if (charToInt(str.charAt(i)) < 0)
+				return false;
+		}
+		
+		return true;
+	}
+	
 	/**
 	 * Transforms two chars into one depending on the operator passed.
 	 * @param a - first char
