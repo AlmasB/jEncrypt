@@ -2,7 +2,7 @@ public class OTPDecryptor extends Translator
 {
 	public String process(String text, String key)
 	{
-		String innerKey = getInnerKey(text, key);
+		String innerKey = getInnerKey(text.length(), key);
 		
 		String decrypted = "";
 		
