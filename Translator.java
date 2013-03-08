@@ -4,16 +4,15 @@ public class Translator
 	
 	private String sort(String line)
 	{
-		char[] key = line.toCharArray();
 		String temp1 = "";
 		String temp2 = "";
 		
-		for (int i = 0; i < key.length; i++)
+		for (int i = 0; i < line.length(); i++)
 		{
 			if (i % 2 == 0)
-				temp2 += key[i];
+				temp2 += line.charAt(i);
 			else
-				temp1 += key[i];
+				temp1 += line.charAt(i);
 		}
 		
 		return temp1 + temp2;
