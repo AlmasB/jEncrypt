@@ -4,7 +4,7 @@ import java.awt.event.*;
 
 public class GUI extends JFrame
 {
-  private static final int H = 700; // Height of window
+	private static final int H = 700; // Height of window
 	private static final int W = 600; // Width of window
 	private static final int TM = 10; // Top margin
 
@@ -41,7 +41,7 @@ public class GUI extends JFrame
 		Container cp = getContentPane(); // Content pane
 		cp.setLayout(null); // No layout manager
 		setSize(W, H); // Size of Window
-		setTitle("Encryptor/Decryptor 0.1 by Almas");
+		setTitle("Encryptor/Decryptor 0.2 by Almas");
 		Font font = new Font("Monospaced", Font.PLAIN, 12); // Font Used
 		
 		label1.setBounds(10, TM, 150, 20);
@@ -123,10 +123,15 @@ public class GUI extends JFrame
 			String text = theInput1.getText(); // User input
 			String key = theKey1.getText();
 			
-			if (enc.validate(text) && enc.validate(key))
-				theOutput1.setText(enc.process(text, key));
+			if (text.length() <= key.length())
+				theOutput1.setText("Error 1: Message has to be longer than key!");
 			else
-				theOutput1.setText("Your text or key contains not yet supported characters!");
+			{
+				if (enc.validate(text) && enc.validate(key))
+					theOutput1.setText(enc.process(text, key));
+				else
+					theOutput1.setText("Error 2: Your text/key contains not yet supported characters!");
+			}
 		}
 	}
 	
@@ -138,10 +143,15 @@ public class GUI extends JFrame
 			String text = theInput2.getText(); // User input
 			String key = theKey2.getText();
 			
-			if (dec.validate(text) && dec.validate(key))
-				theOutput1.setText(dec.process(text, key));
+			if (text.length() <= key.length())
+				theOutput2.setText("Error 1: Message has to be longer than key!");
 			else
-				theOutput1.setText("Your text or key contains not yet supported characters!");
+			{
+				if (dec.validate(text) && dec.validate(key))
+					theOutput2.setText(dec.process(text, key));
+				else
+					theOutput2.setText("Error 2: Your text/key contains not yet supported characters!");
+			}
 		}
 	}
 }
