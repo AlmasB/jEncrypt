@@ -1,5 +1,8 @@
 public class Translator
 {
+	/*
+	 * the cipher string. If you want to increase supported chars just add here.
+	 */
 	private final String ABC = "?abcdefghijklmnopqrstuvwxyz,.<>[]{}'ABCDEFGHIJKLMNOPQRSTUVWXYZ:;()-+=/*%!1234567890 ";
 	
 	private String sort(String line)
@@ -77,22 +80,37 @@ public class Translator
 		return intToChar(result);
 	}
 	
-	public String getInnerKey(String text, String key)
+	/**
+	 * Generates another key which is not seen by the user.
+	 * It's this key that's used for encryption/decryption.
+	 * However, it can only be generated from the original key.
+	 * So if the user entered key isn't the same then you get a different decryption.
+	 * @param length - length of the message
+	 * @param key - original key that the user entered
+	 * @return - generated key
+	 */
+	
+	public String getInnerKey(int length, String key)
 	{
 		String innerKey = "";
 		
 		int i = 0;
 		int j = 2;
 		
-		int sum = (int)(charToInt(key.charAt(i)) * Math.PI);
+		int factor = (int)(charToInt(key.charAt(i)) * Math.PI);
 		
-		while (innerKey.length() < text.length())
+		while (innerKey.length() < length)
 		{
-			innerKey += intToChar(charToInt(key.charAt(i)) + sum + charToInt(key.charAt(i+1)) * (int)(j+Math.E+0.5));
+			int char1 = charToInt(key.charAt(i));
+			int char2 =	charToInt(key.charAt(i + 1));
 			
-			i++; j++; sum += charToInt(key.charAt(i)) + (int)(Math.PI * j);
+			innerKey += intToChar(factor + char1 + char2 * (int)(j + Math.E + 0.5));
 			
-			if (i == key.length()-1)
+			factor += char1 + (int)(Math.PI * j);
+			
+			i++; j++;
+			
+			if (i == key.length() - 1)
 				i = 0;
 		}
 		
