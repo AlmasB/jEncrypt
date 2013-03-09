@@ -5,6 +5,13 @@ public class Translator
 	 */
 	private final String ABC = "?abcdefghijklmnopqrstuvwxyz,.<>[]{}'ABCDEFGHIJKLMNOPQRSTUVWXYZ:;()-+=/*%!1234567890 ";
 	
+	/**
+	 * Sorts the string in a way that all odd chars go to beginning
+	 * and all even chars are added afterwards
+	 * @param line - the string to be sorted
+	 * @return - sorted string
+	 */
+	
 	private String sort(String line)
 	{
 		String temp1 = "";
@@ -21,6 +28,12 @@ public class Translator
 		return temp1 + temp2;
 	}
 	
+	/**
+	 * Looks up an int value of the char from the cipher string
+	 * @param c - char which value is being searched
+	 * @return - an int value of the char
+	 */
+	
 	private int charToInt(char c)
 	{
 		for (int i = 0; i < ABC.length(); i++)
@@ -32,6 +45,12 @@ public class Translator
 		return -1;
 	}
 	
+	/**
+	 * Returns a char from the cipher string with the passed index
+	 * @param a - index
+	 * @return - char at that index
+	 */
+	
 	private char intToChar(int a)
 	{
 		if (a > 0)
@@ -41,6 +60,12 @@ public class Translator
 		
 		return ABC.charAt(a);
 	}
+	
+	/**
+	 * Checks whether all chars from the string are convertable
+	 * @param str - checked string
+	 * @return - true if ALL chars exist in the cipher string, false otherwise
+	 */
 	
 	public boolean validate(String str)
 	{
@@ -92,21 +117,30 @@ public class Translator
 	
 	public String getInnerKey(int length, String key)
 	{
+		/*
+		 * The cipher value, sort of key factor, can change to generate a different key
+		 * Preferably an irrational number
+		 * Will make dynamic in the following versions
+		 */
+		final double VAL = Math.PI;
+				
 		String innerKey = "";
 		
 		int i = 0;
 		int j = 2;
 		
-		int factor = (int)(charToInt(key.charAt(i)) * Math.PI);
+		//Will change the algorithm later to make more complex but easy to read
+		
+		int factor = (int)(charToInt(key.charAt(i)) * VAL);
 		
 		while (innerKey.length() < length)
 		{
 			int char1 = charToInt(key.charAt(i));
 			int char2 =	charToInt(key.charAt(i + 1));
 			
-			innerKey += intToChar(factor + char1 + char2 * (int)(j + Math.E + 0.5));
-			
-			factor += char1 + (int)(Math.PI * j);
+			innerKey += intToChar(factor + char1 + (int)(char2 * (j + VAL)));
+
+			factor += char1 + (int)(j * VAL);
 			
 			i++; j++;
 			
