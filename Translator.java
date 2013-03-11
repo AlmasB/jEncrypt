@@ -6,29 +6,6 @@ public class Translator
 	private final String ABC = "?abcdefghijklmnopqrstuvwxyz,.<>[]{}'ABCDEFGHIJKLMNOPQRSTUVWXYZ:;()-+=/*%!1234567890 ";
 	
 	/**
-	 * Sorts the string in a way that all odd chars go to beginning
-	 * and all even chars are added afterwards
-	 * @param line - the string to be sorted
-	 * @return - sorted string
-	 */
-	
-	private String sort(String line)
-	{
-		String temp1 = "";
-		String temp2 = "";
-		
-		for (int i = 0; i < line.length(); i++)
-		{
-			if (i % 2 == 0)
-				temp2 += line.charAt(i);
-			else
-				temp1 += line.charAt(i);
-		}
-		
-		return temp1 + temp2;
-	}
-	
-	/**
 	 * Looks up an int value of the char from the cipher string
 	 * @param c - char which value is being searched
 	 * @return - an int value of the char
@@ -53,10 +30,10 @@ public class Translator
 	
 	private char intToChar(int a)
 	{
-		if (a > 0)
-			a = a % ABC.length();
+		if (a >= ABC.length())
+			a %= ABC.length();
 		else if (a < 0)
-			a = ABC.length() + a;
+			a += ABC.length();
 		
 		return ABC.charAt(a);
 	}
@@ -90,69 +67,28 @@ public class Translator
 	{
 		int char1 = charToInt(a);
 		int char2 = charToInt(b);
-		int result = 0;
 		
-		switch (operator)
-		{
-			case '+':
-				result = char1 + char2;
-				break;
-			case '-':
-				result = char1 - char2;
-				break;
-		}
+		boolean plus = operator == '+';
 		
-		return intToChar(result);
+		return plus ? intToChar(char1 + char2) : intToChar(char1 - char2);
 	}
 	
 	/**
-	 * Generates another key which is not seen by the user.
-	 * It's this key that's used for encryption/decryption.
-	 * However, it can only be generated from the original key.
-	 * So if the user entered key isn't the same then you get a different decryption.
-	 * @param length - length of the message
-	 * @param key - original key that the user entered
-	 * @return - generated key
+	 * Generates a key, which is a string of random chars from the cipher string
+	 * @param length - length of the key
+	 * @return - key
 	 */
 	
-	public String getInnerKey(int length, String key)
+	public String generateKey(int length)
 	{
-		/*
-		 * The cipher value, sort of key factor, can change to generate a different key
-		 * Preferably an irrational number
-		 * Will make dynamic in the following versions
-		 */
-		final double VAL = Math.PI;
-				
-		String innerKey = "";
+		String key = "";
 		
-		int i = 0;
-		int j = 2;
-		
-		//Will change the algorithm later to make more complex but easy to read
-		
-		int factor = (int)(charToInt(key.charAt(i)) * VAL);
-		
-		while (innerKey.length() < length)
+		while (key.length() < length)
 		{
-			int char1 = charToInt(key.charAt(i));
-			int char2 =	charToInt(key.charAt(i + 1));
-			
-			innerKey += intToChar(factor + char1 + (int)(char2 * (j + VAL)));
-
-			factor += char1 + (int)(j * VAL);
-			
-			i++; j++;
-			
-			if (i == key.length() - 1)
-				i = 0;
+			int a = (int)(Math.random() * (ABC.length() + 1));
+			key += intToChar(a);
 		}
 		
-		for (int k = 0; k < 5; k ++)
-		{
-			innerKey = sort(innerKey);
-		}
-		
-		return innerKey;
+		return key;
 	}
 }
