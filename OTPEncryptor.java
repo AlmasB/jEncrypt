@@ -1,16 +1,23 @@
 public class OTPEncryptor extends Translator 
 {
-	public String process(String text, String key)
+	private String key = "";
+	
+	public String process(final String text)
 	{
-		String innerKey = getInnerKey(text.length(), key);
+		key = generateKey(text.length());
 		
 		String encrypted = "";
 		
 		for (int i = 0; i < text.length(); i++)
 		{
-			encrypted += combine(text.charAt(i), innerKey.charAt(i), '+');
+			encrypted += combine(text.charAt(i), key.charAt(i), '+');
 		}
 		
 		return encrypted;
+	}
+	
+	public String getKey()
+	{
+		return key;
 	}
 }
