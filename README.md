@@ -16,6 +16,3 @@ Alternatively on linux you can type:
 To run type
 
 `$ java Main`
-
-## P.S. ##
-Ignore OTPEncryptor file without extension, will delete as soon as I find out how
