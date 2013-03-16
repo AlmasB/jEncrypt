@@ -5,13 +5,17 @@ public class OTPEncryptor extends Translator
 	/**
 	 * Encrypts any text passed to it
 	 * @param text - text to encrypt
-	 * @return - encrypted text
+	 * @return - encrypted text or error message
 	 */
 	
 	public String process(final String text)
 	{
-		key = generateKey(text.length());
+		String mes = validate(text, "");
 		
+		if (!mes.isEmpty())
+			return mes;
+		
+		key = generateKey(text.length());
 		String encrypted = "";
 		
 		for (int i = 0; i < text.length(); i++)
