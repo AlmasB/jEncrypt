@@ -36,10 +36,8 @@ public class GUI extends JFrame
 	private JEditorPane theOutput2 = new JEditorPane();
 	
 	private JButton theButton1 = new JButton(BUTTON_NAME1);
-	private EncBtn onEncBtnPress = new EncBtn();
-	
 	private JButton theButton2 = new JButton(BUTTON_NAME2);
-	private DecBtn onDecBtnPress = new DecBtn();
+	private ButtonPress onBtnPress = new ButtonPress();
 	
 	private OTPEncryptor enc = new OTPEncryptor();
 	private OTPDecryptor dec = new OTPDecryptor();
@@ -49,7 +47,7 @@ public class GUI extends JFrame
 		Container cp = getContentPane(); // Content pane
 		cp.setLayout(null); // No layout manager
 		setSize(W, H); // Size of Window
-		setTitle("Encryptor/Decryptor 0.4 by Almas");
+		setTitle("'Ashu' Encryptor/Decryptor 0.5 by Almas");
 		Font font = new Font("Monospaced", Font.PLAIN, 12); // Font Used
 		
 		//ENCRYPTION COLUMN
@@ -64,7 +62,7 @@ public class GUI extends JFrame
 		cp.add(theInput1); // Add to c. pane
 		
 		theButton1.setBounds(LM, TM + VM * 2 + 20 + HSIZE, 300 - 40, 40);
-		theButton1.addActionListener(onEncBtnPress);
+		theButton1.addActionListener(onBtnPress);
 		cp.add(theButton1);
 		
 		label2.setBounds(LM, TM + VM * 3 + 20 + HSIZE + 40, 100, 20);
@@ -112,7 +110,7 @@ public class GUI extends JFrame
 		cp.add(theKey2); // Add to c. pane
 		
 		theButton2.setBounds(LM2, TM + VM * 4 + 20 + HSIZE + 20 + HSIZE, 300 - 40, 40);
-		theButton2.addActionListener(onDecBtnPress);
+		theButton2.addActionListener(onBtnPress);
 		cp.add(theButton2);
 		
 		label6.setBounds(LM2, TM + VM * 5 + 20 + HSIZE + 20 + HSIZE + 40, 100, 20);
@@ -129,38 +127,31 @@ public class GUI extends JFrame
 		
 		setDefaultCloseOperation(EXIT_ON_CLOSE);// Exit on close
 	}
-
-	class EncBtn implements ActionListener
-	{
-		public void actionPerformed(ActionEvent e)
-		{
-			String text = theInput1.getText();
-		
-			if (enc.validate(text))
-			{
-				theOutput1.setText(enc.process(text));
-				theKey1.setText(enc.getKey());
-			}
-			else
-				theOutput1.setText("Error 2: Your text contains not yet supported characters!");
-		}
-	}
 	
-	class DecBtn implements ActionListener
+	class ButtonPress implements ActionListener
 	{
-		public void actionPerformed(ActionEvent e)
+		public void actionPerformed(ActionEvent ae)
 		{
-			String text = theInput2.getText();
-			String key = theKey2.getText();
+			String text = "";
 			
-			if (text.length() != key.length())
-				theOutput2.setText("Error 1: Message and key have to be of the same length!");
-			else
+			switch(ae.getActionCommand())
 			{
-				if (dec.validate(text) && dec.validate(key))
-					theOutput2.setText(dec.process(text, key));
-				else
-					theOutput2.setText("Error 2: Your text/key contains not yet supported characters!");
+				case BUTTON_NAME1:
+					
+					text = theInput1.getText();
+					theOutput1.setText(enc.process(text));
+					theKey1.setText(enc.getKey());
+					break;
+					
+				case BUTTON_NAME2:
+					
+					text = theInput2.getText();
+					String key = theKey2.getText();
+					theOutput2.setText(dec.process(text, key));	
+					break;
+					
+				default:
+					break;
 			}
 		}
 	}
