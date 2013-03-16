@@ -93,14 +93,78 @@ public class Translator
 	
 	public String generateKey(int length)
 	{
-		String key = "";
+		String innerKey = "";
 		
-		while (key.length() < length)
+		while (innerKey.length() < length)
 		{
 			int a = (int)(Math.random() * (ABC.length() + 1));
-			key += intToChar(a);
+			innerKey += intToChar(a);
 		}
 		
+		return innerKey;
+	}
+	
+	/*
+	 * The generated key is held here
+	 */
+	private String key = "";
+	
+	/**
+	 * Encrypts any text passed to it
+	 * @param text - text to encrypt
+	 * @return - encrypted text or error message
+	 */
+	
+	public String encrypt(final String text)
+	{
+		key = "";
+		String mes = validate(text, "");
+		
+		if (!mes.isEmpty())
+			return mes;
+		
+		key = generateKey(text.length());
+		String encrypted = "";
+		
+		for (int i = 0; i < text.length(); i++)
+		{
+			encrypted += combine(text.charAt(i), key.charAt(i), '+');
+		}
+		
+		return encrypted;
+	}
+	
+	/**
+	 * Gets the generated key
+	 * @return - key
+	 */
+	
+	public String getKey()
+	{
 		return key;
+	}
+	
+	/**
+	 * Decrypts text with the given key
+	 * @param text - text to decrypt
+	 * @param key - key to use in decryption
+	 * @return decrypted text or error message
+	 */
+	
+	public String decrypt(final String text, final String decKey)
+	{
+		String mes = validate(text, decKey);
+		
+		if (!mes.isEmpty())
+			return mes;
+
+		String decrypted = "";
+		
+		for (int i = 0; i < text.length(); i++)
+		{
+			decrypted += combine(text.charAt(i), decKey.charAt(i), '-');
+		}
+		
+		return decrypted;
 	}
 }
