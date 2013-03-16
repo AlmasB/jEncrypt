@@ -1,6 +1,13 @@
 public class Translator
 {
 	/*
+	 * Errors that could occur
+	 */
+	public static final String ERROR_NONE	    = "";
+	public static final String ERROR_BAD_LENGTH = "Error 1: Message and key have to be of the same length!";
+	public static final String ERROR_BAD_CHARS  = "Error 2: Your text/key contains not yet supported characters!";
+	
+	/*
 	 * the cipher string. If you want to increase supported chars just add here.
 	 */
 	private final String ABC = "?abcdefghijklmnopqrstuvwxyz,.<>[]{}'ABCDEFGHIJKLMNOPQRSTUVWXYZ:;()-+=/*%!1234567890 ";
@@ -39,20 +46,25 @@ public class Translator
 	}
 	
 	/**
-	 * Checks whether all chars from the string are convertable
-	 * @param str - checked string
-	 * @return - true if ALL chars exist in the cipher string, false otherwise
+	 * Checks if all chars in the text are convertable into values.
+	 * If key is passed also checks whether length of key and text equal.
+	 * @param str - message/text
+	 * @param key - key
+	 * @return - a string defining error nature or "" for no error
 	 */
 	
-	public boolean validate(String str)
+	public String validate(String str, String key)
 	{
 		for (int i = 0; i < str.length(); i++)
 		{
 			if (charToInt(str.charAt(i)) < 0)
-				return false;
+				return ERROR_BAD_CHARS;
 		}
 		
-		return true;
+		if (!key.isEmpty() && str.length() != key.length())
+			return ERROR_BAD_LENGTH;
+		
+		return ERROR_NONE;
 	}
 	
 	/**
