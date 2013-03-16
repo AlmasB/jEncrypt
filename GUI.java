@@ -39,15 +39,14 @@ public class GUI extends JFrame
 	private JButton theButton2 = new JButton(BUTTON_NAME2);
 	private ButtonPress onBtnPress = new ButtonPress();
 	
-	private OTPEncryptor enc = new OTPEncryptor();
-	private OTPDecryptor dec = new OTPDecryptor();
+	private Translator trans = new Translator();
 
 	public GUI()
 	{
 		Container cp = getContentPane(); // Content pane
 		cp.setLayout(null); // No layout manager
 		setSize(W, H); // Size of Window
-		setTitle("'Ashu' Encryptor/Decryptor 0.5 by Almas");
+		setTitle("'Ashu' Enc/Dec 0.6 by Almas. Alpha tester - Atheryos");
 		Font font = new Font("Monospaced", Font.PLAIN, 12); // Font Used
 		
 		//ENCRYPTION COLUMN
@@ -139,15 +138,15 @@ public class GUI extends JFrame
 				case BUTTON_NAME1:
 					
 					text = theInput1.getText();
-					theOutput1.setText(enc.process(text));
-					theKey1.setText(enc.getKey());
+					theOutput1.setText(trans.encrypt(text));
+					theKey1.setText(trans.getKey());
 					break;
 					
 				case BUTTON_NAME2:
 					
 					text = theInput2.getText();
 					String key = theKey2.getText();
-					theOutput2.setText(dec.process(text, key));	
+					theOutput2.setText(trans.decrypt(text, key));	
 					break;
 					
 				default:
