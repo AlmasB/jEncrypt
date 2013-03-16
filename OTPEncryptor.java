@@ -2,6 +2,12 @@ public class OTPEncryptor extends Translator
 {
 	private String key = "";
 	
+	/**
+	 * Encrypts any text passed to it
+	 * @param text - text to encrypt
+	 * @return - encrypted text
+	 */
+	
 	public String process(final String text)
 	{
 		key = generateKey(text.length());
@@ -15,6 +21,11 @@ public class OTPEncryptor extends Translator
 		
 		return encrypted;
 	}
+	
+	/**
+	 * Gets the generated key
+	 * @return - key
+	 */
 	
 	public String getKey()
 	{
