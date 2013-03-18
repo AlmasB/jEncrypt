@@ -7,15 +7,18 @@ public class GUI extends JFrame
 	private static final int H = 970; // Height of window
 	private static final int W = 590; // Width of window
 	
-	private static int LM = 10;	//left margin
-	private static int TM = 10; // Top margin
-	
+	private static final int LM1 = 10;	//left margin
 	private static final int LM2 = 300;	//Second Left margin (2nd column)
 	
-	private static final int VM = 10;	//Vertical Margin
+	private static final int VM = 10;	//Vertical Margin inbetween 
+	
+	private static final int WLABEL = 150; // w oflabel
+	private static final int HLABEL = 20; // h of label
 
 	private static final int WSIZE = 260; // Width of sub window
 	private static final int HSIZE = 250; // Height of sub window
+	
+	private static final int HBTN = 40; // Height of button
 	
 	private static final String[] labelNames = {"Enter text to encrypt", 
 			"Generated key", "Generated text", "Enter text to decrypt",
@@ -41,7 +44,7 @@ public class GUI extends JFrame
 		Container cp = getContentPane(); // Content pane
 		cp.setLayout(null); // No layout manager
 		setSize(W, H); // Size of Window
-		setTitle("'Ashu' Enc/Dec 0.7 by Almas. Alpha tester - Atheryos");
+		setTitle("'Ashu' Enc/Dec 0.8 by Almas. Alpha tester - Atheryos");
 		Font font = new Font("Monospaced", Font.PLAIN, 12); // Font Used
 		
 		for (int i = 0; i < size; i++)
@@ -53,15 +56,16 @@ public class GUI extends JFrame
 			textBoxes[i].setFont(font);
 			textBoxes[i].setLineWrap(true);
 			
-			LM = (i >= 3) ? 300 : 10;
+			int LM = (i >= 3) ? LM2 : LM1;
+			int TM = VM;
 			
 			if (i == 3)
-				TM = 10;
+				TM = VM;
 			
-			labels[i].setBounds(LM, TM, 150, 20);
-			TM += 30;
+			labels[i].setBounds(LM, TM, WLABEL, HLABEL);
+			TM += HLABEL + VM;
 			textBoxes[i].setBounds(LM, TM, WSIZE, HSIZE);
-			TM += HSIZE + 10;
+			TM += HSIZE + VM;
 			
 			cp.add(labels[i]);
 			cp.add(textBoxes[i]);
@@ -71,9 +75,9 @@ public class GUI extends JFrame
 		{
 			buttons[i] = new JButton(BTN_NAMES[i]);
 			if (i == 0)
-				buttons[i].setBounds(10, 880, WSIZE, 40);
+				buttons[i].setBounds(LM1, 880, WSIZE, HBTN);
 			else
-				buttons[i].setBounds(300, 880, WSIZE, 40);
+				buttons[i].setBounds(LM2, 880, WSIZE, HBTN);
 			buttons[i].addActionListener(onBtnPress);
 			cp.add(buttons[i]);
 		}
@@ -92,8 +96,8 @@ public class GUI extends JFrame
 				case BUTTON_NAME1:
 					
 					text = textBoxes[0].getText();
-					textBoxes[1].setText(trans.encrypt(text));
-					textBoxes[2].setText(trans.getKey());
+					textBoxes[2].setText(trans.encrypt(text));	//because of the layout 2 comes before 1
+					textBoxes[1].setText(trans.getKey());
 					break;
 					
 				case BUTTON_NAME2:
