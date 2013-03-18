@@ -1,2 +1,2 @@
 all:
-	javac *.java
+	javac -encoding UTF-8 *.java
