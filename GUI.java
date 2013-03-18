@@ -47,6 +47,8 @@ public class GUI extends JFrame
 		setTitle("'Ashu' Enc/Dec 0.8 by Almas. Alpha tester - Atheryos");
 		Font font = new Font("Monospaced", Font.PLAIN, 12); // Font Used
 		
+		int TM = VM;
+		
 		for (int i = 0; i < size; i++)
 		{
 			labels[i] = new JLabel(labelNames[i]);
@@ -57,7 +59,6 @@ public class GUI extends JFrame
 			textBoxes[i].setLineWrap(true);
 			
 			int LM = (i >= 3) ? LM2 : LM1;
-			int TM = VM;
 			
 			if (i == 3)
 				TM = VM;
