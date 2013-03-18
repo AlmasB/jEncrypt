@@ -7,36 +7,31 @@ public class GUI extends JFrame
 	private static final int H = 970; // Height of window
 	private static final int W = 590; // Width of window
 	
-	private static final int LM = 10;	//left margin
-	private static final int TM = 10; // Top margin
+	private static int LM = 10;	//left margin
+	private static int TM = 10; // Top margin
 	
 	private static final int LM2 = 300;	//Second Left margin (2nd column)
 	
 	private static final int VM = 10;	//Vertical Margin
 
+	private static final int WSIZE = 260; // Width of sub window
 	private static final int HSIZE = 250; // Height of sub window
+	
+	private static final String[] labelNames = {"Enter text to encrypt", 
+			"Generated key", "Generated text", "Enter text to decrypt",
+			"Enter key", "Decrypted text"};
+	
+	private static final int size = labelNames.length;
+	
+	private JLabel[] labels 	  = new JLabel[size];
+	private JTextArea[] textBoxes = new JTextArea[size];
 	
 	private static final String BUTTON_NAME1 = "Encrypt";
 	private static final String BUTTON_NAME2 = "Decrypt";
+	private static final String[] BTN_NAMES = {BUTTON_NAME1, BUTTON_NAME2};
 	
-	private JLabel label1 = new JLabel("Enter text to encrypt");
-	private JLabel label2 = new JLabel("Generated key");
-	private JLabel label3 = new JLabel("Generated text");
 	
-	private JLabel label4 = new JLabel("Enter text to decrypt");
-	private JLabel label5 = new JLabel("Enter key");
-	private JLabel label6 = new JLabel("Decrypted text");
-	
-	private JTextArea theInput1 = new JTextArea();			//First Column
-	private JEditorPane theKey1 = new JEditorPane();
-	private JEditorPane theOutput1 = new JEditorPane();
-	
-	private JTextArea theInput2 = new JTextArea();			//Second Column
-	private JTextArea theKey2 = new JTextArea();
-	private JEditorPane theOutput2 = new JEditorPane();
-	
-	private JButton theButton1 = new JButton(BUTTON_NAME1);
-	private JButton theButton2 = new JButton(BUTTON_NAME2);
+	private JButton[] buttons = new JButton[2];
 	private ButtonPress onBtnPress = new ButtonPress();
 	
 	private Translator trans = new Translator();
@@ -46,83 +41,42 @@ public class GUI extends JFrame
 		Container cp = getContentPane(); // Content pane
 		cp.setLayout(null); // No layout manager
 		setSize(W, H); // Size of Window
-		setTitle("'Ashu' Enc/Dec 0.6 by Almas. Alpha tester - Atheryos");
+		setTitle("'Ashu' Enc/Dec 0.7 by Almas. Alpha tester - Atheryos");
 		Font font = new Font("Monospaced", Font.PLAIN, 12); // Font Used
 		
-		//ENCRYPTION COLUMN
-		
-		label1.setBounds(LM, TM, 150, 20);
-		label1.setFont(font);
-		cp.add(label1);
-		
-		theInput1.setBounds(LM, TM + VM + 20, 300 - 40, HSIZE);// Input Area Size
-		theInput1.setFont(font); // Font
-		theInput1.setLineWrap(true);
-		cp.add(theInput1); // Add to c. pane
-		
-		theButton1.setBounds(LM, TM + VM * 2 + 20 + HSIZE, 300 - 40, 40);
-		theButton1.addActionListener(onBtnPress);
-		cp.add(theButton1);
-		
-		label2.setBounds(LM, TM + VM * 3 + 20 + HSIZE + 40, 100, 20);
-		label2.setFont(font);
-		cp.add(label2);
-
-		JScrollPane theSP = new JScrollPane(); // Scrolling window
-		theSP.setBounds(LM, TM + VM * 4 + 20 + HSIZE + 40 + 20, 300 - 40, HSIZE); // Size of window
-		theSP.setFont(font); // Font
-		
-		cp.add(theSP); // Add to c. pane
-		theOutput1.setFont(font);
-		theSP.getViewport().add(theKey1); // Add output area
-		
-		label3.setBounds(LM, TM + VM * 5 + 20 + HSIZE + 40 + 20 + HSIZE, 150, 20);
-		label3.setFont(font);
-		cp.add(label3);
-		
-		JScrollPane theSP3 = new JScrollPane(); // Scrolling window
-		theSP3.setBounds(LM, TM + VM * 6 + 20 + HSIZE + 40 + 20 + HSIZE + 20, 300 - 40, HSIZE); // Size of window
-		theSP3.setFont(font); // Font
-
-		cp.add(theSP3); // Add to c. pane
-		theOutput1.setFont(font);
-		theSP3.getViewport().add(theOutput1); // Add output area
+		for (int i = 0; i < size; i++)
+		{
+			labels[i] = new JLabel(labelNames[i]);
+			labels[i].setFont(font);
 			
-		//DECRYPTION COLUMN
+			textBoxes[i] = new JTextArea();
+			textBoxes[i].setFont(font);
+			textBoxes[i].setLineWrap(true);
+			
+			LM = (i >= 3) ? 300 : 10;
+			
+			if (i == 3)
+				TM = 10;
+			
+			labels[i].setBounds(LM, TM, 150, 20);
+			TM += 30;
+			textBoxes[i].setBounds(LM, TM, WSIZE, HSIZE);
+			TM += HSIZE + 10;
+			
+			cp.add(labels[i]);
+			cp.add(textBoxes[i]);
+		}
 		
-		label4.setBounds(LM2, TM, 150, 20);
-		label4.setFont(font);
-		cp.add(label4);
-		
-		theInput2.setBounds(LM2, TM + VM + 20, 300 - 40, HSIZE);// Input Area Size
-		theInput2.setFont(font); // Font
-		theInput2.setLineWrap(true);
-		cp.add(theInput2); // Add to c. pane
-		
-		label5.setBounds(LM2, TM + VM * 2 + 20 + HSIZE, 100, 20);
-		label5.setFont(font);
-		cp.add(label5);
-		
-		theKey2.setBounds(LM2, TM + VM * 3 + 20 + HSIZE + 20, 300 - 40, HSIZE);// Input Area Size
-		theKey2.setFont(font); // Font
-		theKey2.setLineWrap(true);
-		cp.add(theKey2); // Add to c. pane
-		
-		theButton2.setBounds(LM2, TM + VM * 4 + 20 + HSIZE + 20 + HSIZE, 300 - 40, 40);
-		theButton2.addActionListener(onBtnPress);
-		cp.add(theButton2);
-		
-		label6.setBounds(LM2, TM + VM * 5 + 20 + HSIZE + 20 + HSIZE + 40, 100, 20);
-		label6.setFont(font);
-		cp.add(label6);
-
-		JScrollPane theSP2 = new JScrollPane(); // Scrolling window
-		theSP2.setBounds(LM2, TM + VM * 6 + 20 + HSIZE + 20 + HSIZE + 40 + 20, 300 - 40, HSIZE); // Size of window
-		theSP2.setFont(font); // Font
-
-		cp.add(theSP2); // Add to c. pane
-		theOutput2.setFont(font);
-		theSP2.getViewport().add(theOutput2); // Add output area
+		for (int i = 0; i < buttons.length; i++)
+		{
+			buttons[i] = new JButton(BTN_NAMES[i]);
+			if (i == 0)
+				buttons[i].setBounds(10, 880, WSIZE, 40);
+			else
+				buttons[i].setBounds(300, 880, WSIZE, 40);
+			buttons[i].addActionListener(onBtnPress);
+			cp.add(buttons[i]);
+		}
 		
 		setDefaultCloseOperation(EXIT_ON_CLOSE);// Exit on close
 	}
@@ -137,16 +91,16 @@ public class GUI extends JFrame
 			{
 				case BUTTON_NAME1:
 					
-					text = theInput1.getText();
-					theOutput1.setText(trans.encrypt(text));
-					theKey1.setText(trans.getKey());
+					text = textBoxes[0].getText();
+					textBoxes[1].setText(trans.encrypt(text));
+					textBoxes[2].setText(trans.getKey());
 					break;
 					
 				case BUTTON_NAME2:
 					
-					text = theInput2.getText();
-					String key = theKey2.getText();
-					theOutput2.setText(trans.decrypt(text, key));	
+					text = textBoxes[3].getText();
+					String key = textBoxes[4].getText();
+					textBoxes[5].setText(trans.decrypt(text, key));	
 					break;
 					
 				default:
