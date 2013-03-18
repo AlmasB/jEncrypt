@@ -10,7 +10,7 @@ public class Translator
 	/*
 	 * the cipher string. If you want to increase supported chars just add here.
 	 */
-	private final String ABC = "?abcdefghijklmnopqrstuvwxyz,.<>[]{}'ABCDEFGHIJKLMNOPQRSTUVWXYZ:;()-+=/*%!1234567890 ";
+	private final String ABC = "?abcdefghijklmnopqrstuvwxyz,.<>[]{}'ABCDEFGHIJKLMNOPQRSTUVWXYZ:;()-+=/*%!1234567890\"あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわゐゑを ";
 	
 	/**
 	 * Looks up an int value of the char from the cipher string
