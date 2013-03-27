@@ -80,9 +80,7 @@ public class Translator
 		int char1 = charToInt(a);
 		int char2 = charToInt(b);
 		
-		boolean plus = operator == '+';
-		
-		return plus ? intToChar(char1 + char2) : intToChar(char1 - char2);
+		return operator == '+' ? intToChar(char1 + char2) : intToChar(char1 - char2);
 	}
 	
 	/**
@@ -97,8 +95,7 @@ public class Translator
 		
 		while (innerKey.length() < length)
 		{
-			int a = (int)(Math.random() * (ABC.length() + 1));
-			innerKey += intToChar(a);
+			innerKey += intToChar((int)(Math.random() * (ABC.length() + 1)));
 		}
 		
 		return innerKey;
