@@ -8,7 +8,7 @@ Type the following:
 
 `$ javac -encoding UTF-8 *.java`
 
-Alternatively on linux you can type:
+Alternatively on linux machines you can type:
 
 `$ make`
 
