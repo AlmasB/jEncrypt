@@ -1,3 +1,6 @@
+/**
+ * @author Almas Baimagambetov (ab607@uni.brighon.ac.uk)
+ */
 public class Translator
 {
 	/*
