@@ -3,10 +3,12 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class GUI extends JFrame {
+    /**
+     * 
+     */
+    private static final long serialVersionUID = -3861107208336244890L;
     private static final int H = 970; // Height of window
     private static final int W = 590; // Width of window
-
-    // test
 
     private static final int LM1 = 10; // left margin
     private static final int LM2 = 300; // Second Left margin (2nd column)
@@ -21,9 +23,14 @@ public class GUI extends JFrame {
 
     private static final int HBTN = 40; // Height of button
 
-    private static final String[] labelNames = { "Enter text to encrypt",
-            "Generated key", "Generated text", "Enter text to decrypt",
-            "Enter key", "Decrypted text" };
+    private static final String[] labelNames = { 
+        "Enter text to encrypt",
+        "Generated key", 
+        "Generated text", 
+        "Enter text to decrypt",
+        "Enter key", 
+        "Decrypted text" 
+        };
 
     private static final int size = labelNames.length;
 
