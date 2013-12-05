@@ -6,7 +6,7 @@ A simple program written in java that allows users to encrypt/decrypt their mess
 You will need to have java run-time environment installed on your machine. Preferably 1.7
 Type the following:
 
-`$ javac -encoding UTF-8 *.java`
+`$ javac *.java`
 
 Alternatively on linux machines you can type:
 
