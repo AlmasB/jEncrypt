@@ -1,3 +1,4 @@
+package com.almasb.jencrypt;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;

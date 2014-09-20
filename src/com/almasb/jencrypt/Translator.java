@@ -1,3 +1,4 @@
+package com.almasb.jencrypt;
 /**
  * @author Almas Baimagambetov (ab607@uni.brighon.ac.uk)
  */

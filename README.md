@@ -2,17 +2,18 @@
 
 A simple program written in java that allows users to encrypt/decrypt their messages
 
-## Compiling ##
-You will need to have java run-time environment installed on your machine. Preferably 1.7
-Type the following:
+Compile & Run
+=============
 
-`$ javac *.java`
+Required:
+- Oracle JDK 1.8+
+- almasb-lib.jar 1.1.4 (can be found in lib/)
 
-Alternatively on linux machines you can type:
+Commands:
 
-`$ make`
+(in project root)
 
-## Run ##
-To run type
-
-`$ java Main`
+```bash
+$ mvn package
+$ mvn exec:java
+```
