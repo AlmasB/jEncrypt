@@ -12,16 +12,16 @@
 <?import javafx.scene.text.*?>
 <?import javafx.scene.paint.Color?>
 
-<BorderPane fx:controller="com.almasb.jencrypt.Controller" prefWidth="800" prefHeight="600" xmlns:fx="http://javafx.com/fxml">
+<BorderPane fx:controller="com.almasb.jencrypt.Controller" xmlns:fx="http://javafx.com/fxml">
 
     <fx:define>
-        <Image fx:id="imgDrop" url="@images/ic_drop.png" />
+        <Image fx:id="imgDrop" url="@images/ic_drop.png" requestedWidth="256" preserveRatio="true" smooth="true" />
     </fx:define>
     
     <top>
         <ToolBar fx:id="toolbar">
             <items>
-                <CheckBox fx:id="checkBox" />
+                <CheckBox fx:id="isDecrypt" text="Decrypt?" />
                 <Label text="Password: " />
                 <TextField fx:id="fieldPassword" />
             </items>
@@ -29,9 +29,13 @@
     </top>
     
     <center>
-        <Pane onDragOver="#onDragOver" onDragDropped="#onDragDropped">
+        <StackPane onDragOver="#onDragOver" onDragDropped="#onDragDropped">
             <ImageView image="$imgDrop" />
-        </Pane>
+        </StackPane>
     </center>
+
+    <bottom>
+        <Label text="Drag and drop a file to encrypt/decrypt." />
+    </bottom>
 
 </BorderPane>

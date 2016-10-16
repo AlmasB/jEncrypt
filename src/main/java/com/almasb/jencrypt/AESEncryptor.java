@@ -1,13 +1,12 @@
 package com.almasb.jencrypt;
 
-import java.security.SecureRandom;
-
 import javax.crypto.Cipher;
 import javax.crypto.SecretKey;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.PBEKeySpec;
 import javax.crypto.spec.SecretKeySpec;
+import java.security.SecureRandom;
 
 /**
  * Uses Advanced Encryption Standard.
@@ -27,7 +26,7 @@ public final class AESEncryptor {
      * @param password
      * @return encrypted data
      */
-    public byte[] encrypt(byte[] data, char[] password) {
+    public byte[] encrypt(byte[] data, char[] password) throws AESException {
         byte[] salt = new byte[8];
         random.nextBytes(salt);
 
@@ -56,7 +55,7 @@ public final class AESEncryptor {
 
             return encryptedData;
         } catch (Exception e) {
-            throw new RuntimeException("Failed to encrypt: " + e);
+            throw new AESException("Failed to encrypt: " + e);
         }
     }
 
@@ -67,7 +66,7 @@ public final class AESEncryptor {
      * @param password
      * @return decrypted data
      */
-    public byte[] decrypt(byte[] encryptedData, char[] password) {
+    public byte[] decrypt(byte[] encryptedData, char[] password) throws AESException {
         byte[] salt = new byte[8];
         byte[] iv = new byte[16];
         byte[] data = new byte[encryptedData.length - 16 - 8];
@@ -93,7 +92,7 @@ public final class AESEncryptor {
 
             return cipher.doFinal(data);
         } catch (Exception e) {
-            throw new RuntimeException("Failed to decrypt: " + e);
+            throw new AESException("Failed to decrypt: " + e);
         }
     }
 }

@@ -9,11 +9,13 @@ import javafx.stage.Stage;
 public class JEncryptApp extends Application {
 
     @Override
-    public void start(Stage primaryStage) throws Exception {
+    public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("ui.fxml"));
 
-        primaryStage.setScene(new Scene(root));
-        primaryStage.show();
+        stage.setScene(new Scene(root));
+        stage.setTitle("jEncrypt 1.0");
+        stage.setResizable(false);
+        stage.show();
     }
 
     public static void main(String[] args) {
